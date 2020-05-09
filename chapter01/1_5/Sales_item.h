@@ -1,20 +1,22 @@
 /*
  * This file contains code from "C++ Primer, Fifth Edition", by Stanley B.
- * Lippman, Josee Lajoje, and Barbara E. Moo, and is vovered under the 
+ * Lippman, Josee Lajoje, and Barbara E. Moo, and is covered under the 
+ * copyright and warranty notices given in that book:
+ *
+ * "Copyright (c) 2013 by Objectwrite, Inc., Josee Lajoie, and Barbara E. Moo."
  *
  *
- *
- * "The authors and publisher have taken care in the prepararion of this book,
+ * "The authors and publisher have taken care in the preparation of this book,
  * but make no expressed or implied warranty of any kind and assume for 
  * incidental or consequential damages in connection with or arising out of the
- * use of the informatiuon or programs conrtained herein."
+ * use of the information or programs contained herein."
  * 
  * Permission is granted for this code be used for educational purposes in 
  * association with the book, given proper citation if and when posted or 
  * reproduced.Any commercial use of this code requires the explicit written
- * permission of the publisher , Addison_Wesley Professional, a division of
- * Pearson Education, Inc. Send your request for permission, station clearly* 
- * what code you would like to use, and in what specific way , to the follwing
+ * permission of the publisher, Addison-Wesley Professional, a division of
+ * Pearson Education, Inc. Send your request for permission, stating clearly
+ * what code you would like to use, and in what specific way, to the follwing
  * address:
  *
  *      Pearson Education, Inc.
@@ -35,7 +37,7 @@
 //we're here only if SALESITEM_H has not yet been defined
 #define SALESITEM_H
 
-//Definition of Sales_item class and related functions goes gere
+//Definition of Sales_item class and related functions goes here
 #include <iostream>
 #include <string>
 
@@ -105,7 +107,7 @@ Sales_item& Sales_item::operator+=(const Sales_item& rhs)
 Sales_item
 operator+(const Sales_item& lhs, const Sales_item& rhs)
 {
-    Sales_item ret(lhs);     //copy (|lhs|) into a local object taht we'll return
+    Sales_item ret(lhs);     //copy (|lhs|) into a local object that we'll return
     ret += rhs;              //add in te contents of (|rhs|)
     return ret;              //return (|ret|) by value
 }
@@ -115,7 +117,7 @@ operator>>(std::istream& in, Sales_item& s)
 {
     double price;
     in >> s.bookNo >> s.units_sold >> price;
-    //check that the inpus succeeded
+    //check that the inputs succeeded
     if(in)
         s.revenue = s.units_sold * price;
     else
