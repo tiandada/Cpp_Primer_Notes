@@ -1,0 +1,16 @@
+#include <iostream>
+#include <numeric>
+#include <vector>
+
+using std::cout;
+using std::endl;
+using std::vector;
+using std::accumulate;
+
+int main()
+{
+	vector<double> iv = {0,1.1,2,3,4,5,6,7,8,9};
+	auto sum = accumulate(iv.cbegin(), iv.cend(), 0.);
+	cout << sum << endl;
+	return 0;
+}

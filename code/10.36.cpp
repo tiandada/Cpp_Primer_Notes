@@ -1,0 +1,16 @@
+#include <iostream>
+#include <algorithm>
+#include <list>
+
+using std::cout;
+using std::endl;
+using std::find;
+using std::list;
+
+int main()
+{
+	list<int> lst = {0,1,3,4,5,0,4,9};
+	auto result = find(lst.crbegin(), lst.crend(), 0);
+	cout << std::distance(result, lst.crend()) << endl;
+	return 0;
+}

@@ -1,0 +1,22 @@
+#include <iostream>
+#include <string>
+
+using std::cin;
+using std::cout;
+using std::endl;
+using std::string;
+
+int main()
+{
+	string s1, s2;
+	string res;
+	do {
+		cout << "Please input two string:";
+		cin >> s1 >> s2;
+		cout << (s1.size() < s2.size() ? s1 : s2)  << endl
+		     << "More? Enter yes or no: ";
+		cin >> res;
+	}
+	while (!res.empty() && res[0] != 'n');
+}
+		

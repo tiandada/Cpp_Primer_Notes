@@ -1,0 +1,23 @@
+#include <iostream>
+#include <vector>
+
+using std::cout;
+using std::endl;
+using std::vector;
+
+void print(vector<int>::const_iterator first, vector<int>::const_iterator last)
+{
+	if(first != last)
+	{
+		cout << *first << " ";
+		print(++first, last);
+	}
+}
+
+int main()
+{
+	vector<int> vec = {0,1,2,3,4,5,6,7,8};
+	print(vec.begin(), vec.end());
+	cout << endl;
+	return 0;
+}

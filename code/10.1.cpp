@@ -1,0 +1,15 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using std::cout;
+using std::endl;
+using std::vector;
+
+int main()
+{
+	vector<int> iv = {1,2,3,3,3,3,3,5,6,7,8,9};
+	auto c = count(iv.begin(), iv.end(), 3);
+	cout << c << endl;
+	return 0;
+}
