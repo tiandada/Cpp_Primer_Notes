@@ -1,0 +1,37 @@
+#include <iostream>
+#include <vector>
+#include <memory>
+
+using std::cin;
+using std::cout;
+using std::endl;
+using std::vector;
+using std::shared_ptr;
+using std::make_shared;
+
+auto make()
+{
+	shared_ptr<vector<int>> v = make_shared<vector<int>>();
+	return v;
+}
+
+auto save(shared_ptr<vector<int>> vec)
+{
+	int i;
+	while(cin >> i)
+		vec->push_back(i);
+	return vec;
+}
+
+void print(shared_ptr<vector<int>> vec)
+{
+	for(auto i : *vec)
+		cout << i << " ";
+	cout << endl;
+}
+
+int main()
+{
+	print(save(make()));
+	return 0;	
+}
