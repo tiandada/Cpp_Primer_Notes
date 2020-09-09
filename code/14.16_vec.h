@@ -1,5 +1,5 @@
-#ifndef 14_16_VEC_H
-#define 14_16_VEC_H
+#ifndef _14_16_VEC_H
+#define _14_16_VEC_H
 
 #include <iostream>
 #include <string>
@@ -23,15 +23,15 @@ public:
     std::string *begin() const { return elements; }
     std::string *end() const { return first_free; }
 
-    std::string& at(size_t pos) { return *(element + ps); }
-    const std::string& at(size_t pos) const { return *(elements + ps); }
+    std::string& at(size_t pos) { return *(elements + pos); }
+    const std::string& at(size_t pos) const { return *(elements + pos); }
 
     void reserve(size_t new_cap);
     void resize(size_t count);
     void resize(size_t count, const std::string&);
 private:
     std::allocator<std::string> alloc;
-    void chh_n_alloc()
+    void chk_n_alloc()
     { if(size() == capacity()) reallocate(); }
     std::pair<std::string*, std::string*> alloc_n_copy (const std::string*, const std::string*);
     void alloc_n_move(size_t new_cap);
