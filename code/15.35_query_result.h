@@ -8,7 +8,7 @@
 #include <set>
 
 class QueryResult {
-	friend std::ostream& print(std::ostream&, const QueryResult&);
+	friend std::ostream& operator<<(std::ostream&, const QueryResult&);
 public:
 	QueryResult(std::string s, std::shared_ptr<std::set<TextQuery::line_no>> sp_l, StrBlob f) : sought(s), sp_lines(sp_l), file(f) { }
 	const StrBlob& get_file() const { return file; }
@@ -20,7 +20,7 @@ private:
 	StrBlob file;
 };
 
-std::ostream& print(std::ostream&, const QueryResult &);
+std::ostream& operator<<(std::ostream&, const QueryResult &);
 
 #endif
 
