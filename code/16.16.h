@@ -33,16 +33,16 @@ private:
 template<typename T>
 Vec<T>::Vec(std::initializer_list<T> l)
 {
-	T* const newData = alloc.alocate(l.size());
+	T* const newData = alloc.allocate(l.size());
 	T* p = newData;
 	for(const auto &t : l)
 		alloc.construct(p++, t);
 	elements = newData;
-	first_free = cap = element + l.size();
+	first_free = cap = elements + l.size();
 }
 
 template<typename T>
-Vec<T>::Vec<const Vec<T>& v>
+Vec<T>::Vec(const Vec<T>& v)
 {
 	std::pair<T*, T*> newData = alloc_n_copy(v.begin(), v.end());
 	elements = newData.first;
@@ -50,7 +50,7 @@ Vec<T>::Vec<const Vec<T>& v>
 }
 
 template<typename T>
-Vec<T>& Vec<T>::operator=(const Vec& rhs)
+Vec<T>& Vec<T>::operator=(const Vec& v)
 {
 	std::pair<T*, T*> newData = alloc_n_copy(v.begin(), v.end());
 	free();
@@ -80,17 +80,67 @@ void Vec<T>::reserve(std::size_t n)
 }
 
 template<typename T>
-void Vec<T>::resize(td::size_t n)
+void Vec<T>::resize(std::size_t n)
 {
 	resize(n, T());
+}
+
+
+template<typename T>
+void Vec<T>::resize(std::size_t n, const T &t)
+{
+	if(n < size())
+	{
+		for(auto p = elements + n; p != first_free;)
+			alloc.destroy(p++);
+		first_free = elements + n;
+	}
+	else if(n > size())
+	{
+		for(auto i = size(); i != n; ++i)
+			push_back(t);
+	}
 }
 
 template<typename T>
-void Vec<T>::resize(td::size_t n)
+std::pair<T*, T*>
+Vec<T>::alloc_n_copy(T *b, T *e)
 {
-	resize(n, T());
+	T* data = alloc.allocate(e-b);
+	return { data, std::uninitialized_copy(b, e, data) };
 }
 
+template<typename T>
+void Vec<T>::free()
+{
+	if(elements)
+	{
+		for(auto p = first_free; p != elements;)
+			alloc.destroy(--p);
+		alloc.deallocate(elements, capacity());
+	}
+}
 
+template<typename T>
+void Vec<T>::wy_alloc_n_move(std::size_t n)
+{
+	std::size_t newCapacity = n;
+	T* newData = alloc.allocate(newCapacity);
+	T* dest = newData;
+	T* old = elements;
+	for(std::size_t i = 0; i != size(); ++i)
+		alloc.construct(dest++, std::move(*old++));
+	free();
+	elements = newData;
+	first_free = dest;
+	cap = elements + newCapacity;
+}
 
+template<typename T>
+void Vec<T>::reallocate()
+{
+	std::size_t newCapacity = size() ? 2 * size() : 1;
+	wy_alloc_n_move(newCapacity);
+}
 
+#endif
