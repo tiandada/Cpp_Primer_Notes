@@ -1,6 +1,6 @@
 #ifndef _16_28_UNIQUE_H
 #define _16_28_UNIQUE_H
-#include "16.28_delete.h"
+#include "16.21.h"
 
 template<typename, typename> class unique_pointer;
 template<typename T, typename D> void swap(unique_pointer<T, D>&lhs, unique_pointer<T, D>&rhs);
@@ -15,7 +15,7 @@ public:
 	explicit unique_pointer(T *up) : ptr(up) { }
 	unique_pointer(unique_pointer&& up) noexcept : ptr(up.ptr) { up.ptr = nullptr; }
 	unique_pointer& operator=(unique_pointer &&rhs) noexcept;
-	unique_Pointer& operator=(std::nullptr_t n) noexcept;
+	unique_pointer& operator=(std::nullptr_t n) noexcept;
 
 	T& operator *() const { return *ptr; }
 	T* operator ->() const { return &this->operator *(); }
@@ -23,7 +23,7 @@ public:
 	T* get() const noexcept { return ptr; }
 	void swap(unique_pointer<T, D> &rhs) { swap(*this, rhs); }
 	void reset() noexcept { delete(ptr); ptr = nullptr; }
-	void reset(T *P) noexcept { delete(ptr); ptr = p; }
+	void reset(T *p) noexcept { delete(ptr); ptr = p; }
 	T* release();
 	~unique_pointer()
 	{

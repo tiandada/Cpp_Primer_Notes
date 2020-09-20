@@ -18,7 +18,7 @@ auto swap(SharedPointer<T> &lhs, SharedPointer<T> &rhs)
 template<typename T>
 class SharedPointer {
 public:
-	SharedPointer() : ptr{ nullptr }, ref_count{ new std::size_t(1) }, delete{ Delete{} } { }
+	SharedPointer() : ptr{ nullptr }, ref_count{ new std::size_t(1) }, deleter{ Delete{} } { }
 	explicit SharedPointer(T *raw_ptr) : ptr{ raw_ptr }, ref_count{ new std::size_t(1) }, deleter{ Delete{} } { }
 	SharedPointer(SharedPointer const &other) : ptr{ other.ptr }, ref_count{ other.ref_count }, deleter{ other.deleter } { ++*ref_count; }
 	SharedPointer(SharedPointer &&other) noexcept : ptr{ other.ptr }, ref_count{ other.ref_count }, deleter{ std::move(other.deleter) } 
@@ -61,11 +61,11 @@ public:
 	}
 	auto unique() const
 	{
-		return 1 == *refCount;
+		return 1 == *ref_count;
 	}
 	auto swap(SharedPointer& rhs)
 	{
-		swap(*this, rhs)
+		swap(*this, rhs);
 	}
 	auto reset()
 	{
