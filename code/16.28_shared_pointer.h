@@ -2,6 +2,7 @@
 #define _16_28_SHARED_H
 #include <functional>
 #include "16.28_delete.h"
+#include "16.21.h"
 
 template<typename T>
 class SharedPointer;
