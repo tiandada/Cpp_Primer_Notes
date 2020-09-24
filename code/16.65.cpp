@@ -1,0 +1,34 @@
+#include <iostream>
+#include <vector>
+#include <cstring>
+#include <sstream>
+
+template<typename T>
+std::string debug_rep(T* t)
+{
+	std::ostringstream ret;
+	ret << t;
+	return ret.str();
+}
+
+template<>
+std::string debug_rep(const char *str)
+{
+	std::string ret(str);
+	return str;
+}
+
+template<>
+std::string debug_rep(char *str)
+{
+	std::string ret(str);
+	return ret;
+}
+
+int main()
+{
+	char p[] = "test";
+	std::cout << debug_rep(p) << std::endl;
+	return 0;
+}
+
