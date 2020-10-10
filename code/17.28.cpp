@@ -1,0 +1,15 @@
+#include <iostream>
+#include <random>
+
+unsigned ran()
+{
+	static std::default_random_engine e;
+	static std::uniform_int_distribution<unsigned> u;
+	return u(e);
+}
+
+int main()
+{
+	std::cout << ran() << std::endl;
+	return 0;
+}
