@@ -16,7 +16,7 @@ bool valid(const std::smatch& m)
 
 int main()
 {
-	std::string mail = "(\\d{5})([-])?(\\d{4})?";
+	std::string mail = "(\\d{5})([-])?(\\d{4})?\\b";
 	std::regex r(mail);
 	std::smatch m;
 	std::string s;
